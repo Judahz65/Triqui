@@ -1,0 +1,156 @@
+*{
+    box-sizing: border-box;
+}
+:root{
+    --cellSize: 190px;
+    --markSize: calc(var(--cellSize)*0.9);
+}
+
+/* HEADER */
+.header{
+    position: fixed;
+    top: 0;
+    height: 3rem;
+    width: 100%;
+    background-color: brown;
+}
+.cabeza{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    color: whitesmoke;
+    font-size: 2.5rem;
+}
+/* TABLERO */
+body{
+    margin: 0;
+    background-color: whitesmoke;
+}
+.board{
+    width: 100vw;
+    height: 94vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+/* CELDA */
+.cell{
+    width: var(--cellSize);
+    height: var(--cellSize);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+.cell.x, 
+.cell.circle{
+    cursor: not-allowed;
+}
+.cell.x::before, 
+.cell.x::after,
+.cell.circle::before{
+    background-color: black;
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    background-color: lightgray;
+} 
+
+/* POSICION DE LA X */
+.cell.x::before, 
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    content: '';
+    position: absolute;
+    width: calc(var(--markSize)*0.15);
+    height: var(--markSize);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+
+/* POSICION DE LA O */
+.cell.circle::before, 
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    
+}
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    width: var(--markSize);
+    height: var(--markSize);
+}
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    width: calc(var(--markSize)*0.7);
+    height: calc(var(--markSize)*0.7);
+    background-color: whitesmoke;
+}
+
+/* MENSAJE GANADOR */
+.ganadorMsj{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    font-size: 5rem;
+}
+.ganadorMsj.show{
+    display: flex;
+}
+.restartButton{
+    font-size: 3rem;
+    background-color: brown;
+    color: whitesmoke;
+    border-style: none;
+    padding: .25em .5em;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.restartButton:hover{
+    background-color: whitesmoke;
+    color: brown;
+}
+/* FOOTER */
+.footer{
+    height: 5vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+.pie{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    color:  brown;
+}
